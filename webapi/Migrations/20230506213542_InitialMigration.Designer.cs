@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapi.Data;
 
@@ -11,9 +12,11 @@ using webapi.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230506213542_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,7 @@ namespace webapi.Migrations
                     b.ToTable("BulletPoints");
                 });
 
-            modelBuilder.Entity("webapi.Entities.Ingriedent", b =>
+            modelBuilder.Entity("webapi.Entities.Ingredient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,18 +57,18 @@ namespace webapi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Ingredient")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Ingriedents");
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("webapi.Entities.Photo", b =>
@@ -156,7 +159,7 @@ namespace webapi.Migrations
                     b.Navigation("Section");
                 });
 
-            modelBuilder.Entity("webapi.Entities.Ingriedent", b =>
+            modelBuilder.Entity("webapi.Entities.Ingredient", b =>
                 {
                     b.HasOne("webapi.Entities.Recipe", "Recipe")
                         .WithMany("Ingredients")

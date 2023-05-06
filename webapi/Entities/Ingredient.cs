@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace webapi.Entities
 {
-	public class Ingriedent
+	public class Ingredient
 	{
         public int Id { get; set; }
 
 		[Required]
-		public string Ingredient { get; set; }
+		public string Text { get; set; }
 
 		public int RecipeId { get; set; }
 

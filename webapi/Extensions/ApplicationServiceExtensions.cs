@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using webapi.Data;
+using webapi.Interfaces;
 
 namespace webapi.Extensions
 {
@@ -12,6 +13,9 @@ namespace webapi.Extensions
 			{
 				options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
 			});
+
+			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+			services.AddScoped<IRecipeRepository, RecipeRepository>();
 
 			return services;
 		}

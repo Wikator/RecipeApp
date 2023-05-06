@@ -13,6 +13,6 @@ namespace webapi.Data
         public DbSet<Section> Sections { get; set; }
         public DbSet<BulletPoint> BulletPoints { get; set; }
         public DbSet<Photo> Photos { get; set; }
-        public DbSet<Ingriedent> Ingriedents { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
     }
 }

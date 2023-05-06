@@ -27,19 +27,19 @@ namespace webapi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ingriedents",
+                name: "Ingredients",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Ingredient = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RecipeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ingriedents", x => x.Id);
+                    table.PrimaryKey("PK_Ingredients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ingriedents_Recipes_RecipeId",
+                        name: "FK_Ingredients_Recipes_RecipeId",
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "Id",
@@ -116,8 +116,8 @@ namespace webapi.Migrations
                 column: "SectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ingriedents_RecipeId",
-                table: "Ingriedents",
+                name: "IX_Ingredients_RecipeId",
+                table: "Ingredients",
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
@@ -138,7 +138,7 @@ namespace webapi.Migrations
                 name: "BulletPoints");
 
             migrationBuilder.DropTable(
-                name: "Ingriedents");
+                name: "Ingredients");
 
             migrationBuilder.DropTable(
                 name: "Photos");

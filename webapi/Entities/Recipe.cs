@@ -15,7 +15,7 @@ namespace webapi.Entities
 
         public DateTime CreatedAt { get; set; }
 
-        public List<Ingriedent> Ingredients { get; set; }
+        public List<Ingredient> Ingredients { get; set; }
 
         public List<Section> Sections { get; set; }
 
