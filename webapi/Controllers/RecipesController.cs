@@ -67,8 +67,8 @@ namespace webapi.Controllers
 				{
 					Title = $"Recipe {i}",
 					Introduction = $"Description {i}",
-					Ingredients = new List<Ingredient>(),
-					Sections = new List<Section>(),
+					Ingredients = new List<Ingredient>() { new Ingredient() { Text= $"Milk: {i} glasses" }, new Ingredient() { Text = $"Butter: {i} spoons" } },
+					Sections = new List<Section>() { new Section() { Title = "Section 1", Description= (i % 2 ==0) ? null : "Lorem ipsum, dolor sit amet", BulletPoints= new List<BulletPoint>() } },
 					Photos = new List<Photo>(),
 				};
 				_recipeRepository.Add(recipe);

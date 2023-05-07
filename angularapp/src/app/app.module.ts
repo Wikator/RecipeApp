@@ -6,11 +6,13 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipesListComponent } from './recipes/recipes-list/recipes-list.component';
+import { RecipeDetailsComponent } from './recipes/recipe-details/recipe-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecipesListComponent
+    RecipesListComponent,
+    RecipeDetailsComponent
   ],
   imports: [
     BrowserModule,

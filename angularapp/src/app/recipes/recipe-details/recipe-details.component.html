@@ -1,0 +1,31 @@
+<div class="card my-5" *ngIf="recipe">
+    <img src="{{'https://placekitten.com/500/400' }}" alt="placehoolder" class="card-img-top" />
+    <div class="card-body">
+        <div class="text-center">
+            <strong>{{ recipe.title }}</strong>
+        </div>
+        <div class="card">
+            <div class="card-header text-center">
+                Ingredients
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient.text }}</li>
+                </ul>
+            </div>
+        </div>
+        Sections:
+        <div class="card" *ngFor="let section of recipe.sections">
+            <div class="card-header text-center">
+                {{ section.title }}
+            </div>
+            <div class="card-body" *ngIf="section.description">
+                {{ section.description }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mb-5">
+    <button class="btn btn-primary" [routerLink]="'/recipes'">Go Back</button>
+</div>

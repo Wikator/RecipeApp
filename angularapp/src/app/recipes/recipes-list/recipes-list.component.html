@@ -15,8 +15,8 @@
 
 <div class="row" *ngIf=recipes>
     <div class="col-3" *ngFor="let recipe of recipes.result">
-        <div class="card mt-4">
-            <img src="{{ recipe.photoUrl || 'https://via.placeholder.com/640x360' }}" alt="placehoolder" class="card-img-top" />
+        <div class="card mt-4" [routerLink]="'/recipes/' + recipe.id">
+            <img src="{{ recipe.photoUrl || 'https://placekitten.com/250/200' }}" alt="placehoolder" class="card-img-top" />
             <div class="card-body">
                 <div class="text-center">
                     <strong>{{ recipe.title }}</strong>
