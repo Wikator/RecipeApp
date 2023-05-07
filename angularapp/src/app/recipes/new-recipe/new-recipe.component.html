@@ -1,0 +1,42 @@
+<form [formGroup]="form" (submit)="submit()">
+    <div class="mb-3">
+        <input formControlName="title" class="form-control" placeholder="Title" name="title" required />
+        <div class="text-danger" *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+            Title is required
+        </div>
+    </div>
+    <div class="mb-3">
+        <input formControlName="description" class="form-control" placeholder="Description" name="description" required />
+        <div class="text-danger" *ngIf="form.get('description')?.invalid && form.get('description')?.touched">
+            Description is required
+        </div>
+    </div>
+    Ingredients:
+    <ng-container formArrayName="ingredients">
+        <ng-container *ngFor="let ingredientForm of ingredients.controls; let i = index">
+            <div [formGroupName]="i" class="my-2">
+                <input formControlName="text" class="form-control" placeholder="Text" name="text" required />
+                <div class="text-danger" *ngIf="ingredientForm.get('text')?.invalid && ingredientForm.get('text')?.touched">
+                    Text is required
+                </div>
+                <button type="button" (click)="removeIngredient(i)" class="btn btn-danger mt-1">Remove this ingredient</button>
+            </div>
+        </ng-container>
+    </ng-container>
+    Sections:
+    <ng-container formArrayName="sections">
+        <ng-container *ngFor="let sectionForm of sections.controls; let i = index">
+            <div [formGroupName]="i" class="my-2">
+                <input formControlName="title" class="form-control" placeholder="Text" name="text" required />
+                <div class="text-danger" *ngIf="sectionForm.get('title')?.invalid && sectionForm.get('title')?.touched">
+                    Text is required
+                </div>
+                <input formControlName="description" class="form-control" placeholder="Description (optional)" name="description" />
+                <button type="button" (click)="removeSection(i)" class="btn btn-danger mt-1">Remove this section</button>
+            </div>
+        </ng-container>
+    </ng-container>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Create!</button>
+    <button type="button" (click)="addNewIngredient()" class="btn btn-success">Add new ingredient</button>
+    <button type="button" (click)="addNewSection()" class="btn btn-success">Add new section</button>
+</form>

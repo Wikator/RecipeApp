@@ -7,17 +7,22 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipesListComponent } from './recipes/recipes-list/recipes-list.component';
 import { RecipeDetailsComponent } from './recipes/recipe-details/recipe-details.component';
+import { NewRecipeComponent } from './recipes/new-recipe/new-recipe.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipesListComponent,
-    RecipeDetailsComponent
+    RecipeDetailsComponent,
+    NewRecipeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     PaginationModule.forRoot()
   ],
   providers: [],
