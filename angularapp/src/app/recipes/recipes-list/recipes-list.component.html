@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-center mt-4">
+    <pagination *ngIf="recipes && recipes.pagination"
+                [boundaryLinks]="true"
+                [totalItems]="recipes.pagination.totalItems"
+                [itemsPerPage]="recipes.pagination.itemsPerPage"
+                [maxSize]="10"
+                (pageChanged)="pageChanged($event)"
+                previousText="&lsaquo;"
+                nextText="&rsaquo;"
+                firstText="&laquo;"
+                lastText="&raquo;"></pagination>
+</div>
+
+
+
+<div class="row" *ngIf=recipes>
+    <div class="col-3" *ngFor="let recipe of recipes.result">
+        <div class="card mt-4">
+            <img src="{{ recipe.photoUrl || 'https://via.placeholder.com/640x360' }}" alt="placehoolder" class="card-img-top" />
+            <div class="card-body">
+                <div class="text-center">
+                    <strong>{{ recipe.title }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button (click)="seedDatabase()" class="btn btn-danger mt-5">Seed</button>

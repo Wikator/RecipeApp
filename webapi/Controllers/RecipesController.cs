@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using webapi.Dtos;
 using webapi.Entities;
+using webapi.Extensions;
+using webapi.Helpers;
 using webapi.Interfaces;
 
 namespace webapi.Controllers
@@ -20,9 +22,13 @@ namespace webapi.Controllers
         }
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<RecipeCardDto>>> GetRecipes()
+		public async Task<ActionResult<IEnumerable<RecipeCardDto>>> GetRecipes([FromQuery]PaginationParams paginationParams)
 		{
-			return Ok(await _recipeRepository.GetAllAsync());
+			PagedList<RecipeCardDto> recipes = await _recipeRepository.GetAllAsync(paginationParams);
+
+			Response.AddPaginationHeader(recipes.GetPaginationHeader());
+
+			return Ok(recipes);
 		}
 
 		[HttpGet("{id}")]
@@ -50,6 +56,30 @@ namespace webapi.Controllers
 			}
 
 			return BadRequest("Failed to create recipe");
+		}
+
+		[HttpPost("seed")]
+		public async Task<ActionResult> SeedRecipes()
+		{
+			for (int i = 0; i < 100; i++)
+			{
+				Recipe recipe = new()
+				{
+					Title = $"Recipe {i}",
+					Introduction = $"Description {i}",
+					Ingredients = new List<Ingredient>(),
+					Sections = new List<Section>(),
+					Photos = new List<Photo>(),
+				};
+				_recipeRepository.Add(recipe);
+			}
+
+			if (await _recipeRepository.SaveAllAsync())
+			{
+				return Ok();
+			}
+
+			return BadRequest("Something went wrong when seeding recipes");
 		}
     }
 }

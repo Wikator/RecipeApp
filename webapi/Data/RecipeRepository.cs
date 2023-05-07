@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using webapi.Dtos;
 using webapi.Entities;
+using webapi.Helpers;
 using webapi.Interfaces;
 
 namespace webapi.Data
@@ -23,9 +24,11 @@ namespace webapi.Data
 			_context.Recipes.Add(recipe);
 		}
 
-		public async Task<IEnumerable<RecipeCardDto>> GetAllAsync()
+		public async Task<PagedList<RecipeCardDto>> GetAllAsync(PaginationParams paginationParams)
 		{
-			return await _context.Recipes.ProjectTo<RecipeCardDto>(_mapper.ConfigurationProvider).ToListAsync();
+			IQueryable<RecipeCardDto> recipeCardDtos = _context.Recipes.ProjectTo<RecipeCardDto>(_mapper.ConfigurationProvider).AsQueryable();
+
+			return await PagedList<RecipeCardDto>.CreateAsync(recipeCardDtos, paginationParams.PageNumber, paginationParams.PageSize);
 		}
 
 		public async Task<RecipeDto?> GetAsync(int id)
